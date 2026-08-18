@@ -41,6 +41,12 @@ services:
   plausible:
     expose:
       - "8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plausible-wedooall.entryPoints=http"
+      - "traefik.http.routers.plausible-wedooall.rule=Host(`analytics.wedooall.com`)"
+      - "traefik.http.routers.plausible-wedooall.service=plausible-wedooall"
+      - "traefik.http.services.plausible-wedooall.loadbalancer.server.port=8000"
     image: ghcr.io/plausible/community-edition:v3.2.1
     restart: always
     command: sh -c "/entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
