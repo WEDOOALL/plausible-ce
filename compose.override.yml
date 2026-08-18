@@ -1,0 +1,4 @@
+services:
+  plausible:
+    expose:
+      - "8000"
